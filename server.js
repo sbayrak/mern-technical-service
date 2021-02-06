@@ -1,11 +1,15 @@
 const express = require('express');
 const app = express();
+const connectDB = require('./db');
 
-app.use(express.json());
+// INIT DATABASE CONNECTION
+connectDB();
 
-app.get('/', (req, res) => {
-  res.send('hi');
-});
+// JSON MIDDLEWARE
+app.use(express.json({ extended: false }));
+
+// ROUTES
+app.use('/api/users', require('./routes/api/users'));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server is listening on ${PORT} `));
