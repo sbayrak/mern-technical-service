@@ -4,18 +4,15 @@ const User = require('../../models/User');
 const jwt = require('jsonwebtoken');
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
-require('dotenv').config();
 
-// @route   GET /api/users
-// @desc    Register user
+// @route   POST /api/auth
+// @desc    Authenticate user and get token
 // @access  Public
 router.post(
   '/',
   [
-    body('company', 'Company name is required').not().isEmpty(),
-    body('password', 'Password is required').isLength({ min: 6 }),
+    body('password', 'Password is required').exists(),
     body('email', 'E-Mail is required').not().isEmpty(),
-    body('address', 'Address is required').not().isEmpty(),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -27,28 +24,24 @@ router.post(
     // Encrypt password
     // Return jwt
 
-    const { company, password, email, address } = req.body;
+    const { password, email } = req.body;
 
     try {
       let user = await User.findOne({ email });
 
-      if (user) {
+      if (!user) {
         return res
           .status(400)
-          .json({ errors: [{ msg: 'User already exists' }] });
+          .json({ errors: [{ msg: 'Invalid credentials' }] });
       }
 
-      user = new User({
-        company,
-        email,
-        password,
-        address,
-      });
+      const isMatch = await bcrypt.compare(password, user.password);
 
-      const salt = await bcrypt.genSalt(10);
-      user.password = await bcrypt.hash(password, salt);
-
-      await user.save();
+      if (!isMatch) {
+        return res
+          .status(400)
+          .json({ errors: [{ msg: 'Invalid credentials' }] });
+      }
 
       const payload = {
         user: {
