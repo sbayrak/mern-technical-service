@@ -13,6 +13,7 @@ router.post(
   '/',
   [
     body('company', 'Company name is required').not().isEmpty(),
+    body('companyfullname', 'Company name is required').not().isEmpty(),
     body('password', 'Password is required').isLength({ min: 6 }),
     body('email', 'E-Mail is required').not().isEmpty(),
     body('address', 'Address is required').not().isEmpty(),
@@ -27,7 +28,7 @@ router.post(
     // Encrypt password
     // Return jwt
 
-    const { company, password, email, address } = req.body;
+    const { company, companyfullname, password, email, address } = req.body;
 
     try {
       let user = await User.findOne({ email });
@@ -41,6 +42,7 @@ router.post(
       user = new User({
         company,
         email,
+        companyfullname,
         password,
         address,
       });
