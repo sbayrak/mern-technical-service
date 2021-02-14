@@ -150,4 +150,23 @@ router.put('/step3/:recordId', auth, async (req, res) => {
     res.status(500).send('Server error...');
   }
 });
+
+router.delete('/:recordId', auth, async (req, res) => {
+  try {
+    let record = await Record.findById(req.params.recordId);
+
+    if (!record) {
+      res.status(404).json({ msg: 'No ad found' });
+    }
+
+    await Record.findOneAndRemove({ _id: req.params.recordId });
+    let records = await Record.find({ user: req.user.id });
+    res.json(records);
+  } catch (err) {
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      return res.status(400).json({ msg: 'No ad found' });
+    }
+    res.status(500).send('Server error...');
+  }
+});
 module.exports = router;
