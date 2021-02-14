@@ -112,10 +112,10 @@ router.put('/step2/:recordId', auth, async (req, res) => {
   }
 });
 
-// @route   PUT /api/records/step2/status/:recordId
-// @desc    Update step2's status
+// @route   PUT /api/records/step3/:recordId
+// @desc    Update record, add step2
 // @access  Private
-router.put('/step2/status/:recordId', auth, async (req, res) => {
+router.put('/step3/:recordId', auth, async (req, res) => {
   try {
     let record = await Record.findById(req.params.recordId);
 
@@ -123,23 +123,25 @@ router.put('/step2/status/:recordId', auth, async (req, res) => {
       res.status(404).json({ msg: 'No ad found' });
     }
 
+    const { status, reason } = req.body;
     var now = new Date();
-    const { status } = req.body;
-    let step2 = record.step2;
-    step2.status = status;
-    step2.date = now;
+    let step3Fields = {};
+    step3Fields.status = status;
+    if (reason) step3Fields.reason = reason;
+    step3Fields.date = now;
 
     record = await Record.findByIdAndUpdate(
       {
-        _id: req.params.id,
+        _id: req.params.recordId,
       },
       {
-        $set: { step2: step2 },
+        $set: { step3: step3Fields },
       },
       {
         new: true,
       }
     );
+
     res.json(record);
   } catch (err) {
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
