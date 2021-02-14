@@ -3,10 +3,11 @@ const router = express.Router();
 const auth = require('../../middleware/auth');
 const User = require('../../models/User');
 const Record = require('../../models/Record');
+const mongoose = require('mongoose');
 
 // @route   POST /api/records
 // @desc    Save user's new record
-// @access  Public
+// @access  Private
 router.post('/', auth, async (req, res) => {
   const {
     customername,
@@ -51,4 +52,100 @@ router.post('/', auth, async (req, res) => {
   }
 });
 
+// @route   GET /api/records
+// @desc    Get user's records
+// @access  Private
+router.get('/', auth, async (req, res) => {
+  try {
+    let records = await Record.find({ user: req.user.id });
+
+    if (!records) {
+      res.status(404).json({ msg: 'No ad found...' });
+    }
+
+    res.json(records);
+  } catch (err) {
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      return res.status(400).json({ msg: 'No ad found' });
+    }
+    res.status(500).send('Server error...');
+  }
+});
+
+// @route   PUT /api/records/step2/:recordId
+// @desc    Update record, add step2
+// @access  Private
+router.put('/step2/:recordId', auth, async (req, res) => {
+  try {
+    let record = await Record.findById(req.params.recordId);
+
+    if (!record) {
+      res.status(404).json({ msg: 'No ad found' });
+    }
+
+    const { detectedFault, price, status } = req.body;
+
+    var now = new Date();
+
+    let step2Fields = {};
+    step2Fields.detectedFault = detectedFault;
+    step2Fields.price = price;
+    step2Fields.status = status;
+    step2Fields.date = now;
+
+    record = await Record.findByIdAndUpdate(
+      {
+        _id: req.params.recordId,
+      },
+      {
+        $set: { step2: step2Fields },
+      },
+      { new: true }
+    );
+
+    res.json(record);
+  } catch (err) {
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      return res.status(400).json({ msg: 'No ad found' });
+    }
+    res.status(500).send('Server error...');
+  }
+});
+
+// @route   PUT /api/records/step2/status/:recordId
+// @desc    Update step2's status
+// @access  Private
+router.put('/step2/status/:recordId', auth, async (req, res) => {
+  try {
+    let record = await Record.findById(req.params.recordId);
+
+    if (!record) {
+      res.status(404).json({ msg: 'No ad found' });
+    }
+
+    var now = new Date();
+    const { status } = req.body;
+    let step2 = record.step2;
+    step2.status = status;
+    step2.date = now;
+
+    record = await Record.findByIdAndUpdate(
+      {
+        _id: req.params.id,
+      },
+      {
+        $set: { step2: step2 },
+      },
+      {
+        new: true,
+      }
+    );
+    res.json(record);
+  } catch (err) {
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      return res.status(400).json({ msg: 'No ad found' });
+    }
+    res.status(500).send('Server error...');
+  }
+});
 module.exports = router;
