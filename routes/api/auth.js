@@ -24,8 +24,8 @@ router.get('/', auth, async (req, res) => {
 router.post(
   '/',
   [
-    body('password', 'Password is required').exists(),
-    body('email', 'E-Mail is required').not().isEmpty(),
+    body('password', 'Please do not leave it blank').exists(),
+    body('email', 'Please do not leave it blank').not().isEmpty(),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -38,6 +38,10 @@ router.post(
     // Return jwt
 
     const { password, email } = req.body;
+
+    if (!email && !password) {
+      res.status(400).json({ msg: 'Please enter both fields' });
+    }
 
     try {
       let user = await User.findOne({ email });
