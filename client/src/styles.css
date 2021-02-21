@@ -298,11 +298,63 @@ table.customTable thead {
   background-color: rgba(5, 128, 5, 0.6);
   color: #fafafa;
 }
+
+nav {
+  height: 60px;
+  width: 100%;
+  padding: 10px;
+  position: fixed;
+  top: 0;
+}
+nav .nav-wrapper {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-evenly;
+}
+nav .nav-wrapper .left {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+}
+nav .nav-wrapper .left img {
+  width: 50px;
+  height: auto;
+}
+nav .nav-wrapper .left a {
+  text-decoration: none;
+  border-bottom: 1px solid rgba(27, 163, 163, 0.8);
+  padding: 10px 20px;
+  font-size: 20px;
+}
+
+nav .nav-wrapper .right {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+}
+nav .nav-wrapper .right ul {
+  list-style: none;
+  padding: 5px 10px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+nav .nav-wrapper .right ul li {
+  padding: 10px 20px;
+  font-size: 20px;
+}
+nav .nav-wrapper .right ul li a {
+  text-decoration: none;
+  border-bottom: 1px solid rgba(27, 163, 163, 0.8);
+}
 .footer {
   width: 100%;
   box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.9);
   height: 15vh;
-  position: fixed;
+  position: relative;
   bottom: 0;
   background-color: rgba(122, 122, 122, 0.8);
 }
@@ -778,6 +830,9 @@ table.customTable thead {
 /* MOBILE MOBILE MOBILE */
 /* MOBILE MOBILE MOBILE */
 @media screen and (min-width: 320px) and (max-width: 600px) {
+  nav {
+  }
+
   .technician .technician-wrapper .group {
     top: 5%;
     padding: 5px;

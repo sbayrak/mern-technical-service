@@ -3,6 +3,7 @@ import {
   REGISTER_SUCCESS,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
+  LOGOUT,
   USER_LOADED,
   AUTH_ERROR,
 } from '../actions/types';
@@ -93,4 +94,10 @@ export const login = (email, password) => async (dispatch) => {
     }
     dispatch({ type: LOGIN_FAIL });
   }
+};
+
+export const logout = () => (dispatch) => {
+  dispatch({
+    type: LOGOUT,
+  });
 };

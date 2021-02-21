@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { login } from '../../actions/auth';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const Login = ({ login }) => {
+const Login = ({ login, isAuthenticated }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -11,6 +12,9 @@ const Login = ({ login }) => {
     e.preventDefault();
     login(email, password);
   };
+  if (isAuthenticated) {
+    return <Redirect to='/'></Redirect>;
+  }
 
   return (
     <div className='login'>
@@ -40,7 +44,14 @@ const Login = ({ login }) => {
         </form>
         <div className='bottom'>
           <p>
-            Having a problem with login ?<a href='#'>Contact</a>
+            Having a problem with login ?
+            <a
+              href='https://www.suatbayrak.com/#contact'
+              target='_blank'
+              rel='noreferrer'
+            >
+              Contact
+            </a>
           </p>
         </div>
       </div>
@@ -52,4 +63,8 @@ Login.propTypes = {
   login: PropTypes.func.isRequired,
 };
 
-export default connect(null, { login })(Login);
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { login })(Login);

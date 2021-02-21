@@ -1,14 +1,22 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 
-const Register = () => {
+const Register = ({ isAuthenticated }) => {
+  if (isAuthenticated) {
+    return <Redirect to='/'></Redirect>;
+  }
+  console.log(isAuthenticated);
+
   return (
-    <div class='register'>
-      <div class='register-wrapper'>
-        <div class='top'>
-          <i class='fas fa-user-plus'></i>
+    <div className='register'>
+      <div className='register-wrapper'>
+        <div className='top'>
+          <i className='fas fa-user-plus'></i>
           <span>Register</span>
         </div>
-        <div class='bottom'>
+        <div className='bottom'>
           <ul>
             <li>Kayıt bilgileriniz için öncelikle ücret onayı alınmalıdır</li>
             <li>
@@ -19,7 +27,13 @@ const Register = () => {
               geçiniz
             </li>
             <li>
-              <a href='#'>Contact</a>
+              <a
+                href='https://www.suatbayrak.com/#contact'
+                target='_blank'
+                rel='noreferrer'
+              >
+                Contact
+              </a>
             </li>
           </ul>
         </div>
@@ -28,4 +42,12 @@ const Register = () => {
   );
 };
 
-export default Register;
+Register.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps)(Register);
