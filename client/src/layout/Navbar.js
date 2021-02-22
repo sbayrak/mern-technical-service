@@ -6,20 +6,21 @@ import { logout } from '../actions/auth';
 import PropTypes from 'prop-types';
 
 const Navbar = ({ logout, isAuthenticated, loading }) => {
-  const [bgColor, setBgColor] = useState('rgba(0,0,0,0.1)');
+  const [bgColor, setBgColor] = useState('rgba(0,0,0,0.4)');
   const [txtColor, setTxtColor] = useState('#000');
+  const [showMenu, setShowMenu] = useState(false);
 
   useEffect(() => {
     let listener = null;
     // eslint-disable-next-line no-unused-vars
     listener = document.addEventListener('scroll', (e) => {
       var scrolled = document.scrollingElement.scrollTop;
-      if (scrolled >= 100) {
+      if (scrolled >= 10) {
         setBgColor('rgba(0,0,0,.9)');
         setTxtColor('#fff');
-      } else if (scrolled < 100) {
-        setBgColor('rgba(0,0,0,.1)');
-        setTxtColor('#000');
+      } else if (scrolled < 10) {
+        setBgColor('rgba(0,0,0,.4)');
+        setTxtColor('#eee');
       }
     });
   });
@@ -27,10 +28,20 @@ const Navbar = ({ logout, isAuthenticated, loading }) => {
   const userLinks = (
     <ul>
       <li>
-        <Link to='/create-record'>Kayıt Aç</Link>
+        <Link
+          to='/create-record'
+          style={{ transition: 'ease-in-out 0.5s', color: txtColor }}
+        >
+          Kayıt Aç
+        </Link>
       </li>
       <li>
-        <Link onClick={logout}>Çıkış</Link>
+        <Link
+          onClick={logout}
+          style={{ transition: 'ease-in-out 0.5s', color: txtColor }}
+        >
+          Çıkış
+        </Link>
       </li>
     </ul>
   );
@@ -38,10 +49,20 @@ const Navbar = ({ logout, isAuthenticated, loading }) => {
   const guestLinks = (
     <ul>
       <li>
-        <Link to='/login'>Giriş</Link>
+        <Link
+          to='/login'
+          style={{ transition: 'ease-in-out 0.5s', color: txtColor }}
+        >
+          Giriş
+        </Link>
       </li>
       <li>
-        <Link to='/register'>Kayıt Ol</Link>
+        <Link
+          to='/register'
+          style={{ transition: 'ease-in-out 0.5s', color: txtColor }}
+        >
+          Kayıt Ol
+        </Link>
       </li>
     </ul>
   );
@@ -59,24 +80,12 @@ const Navbar = ({ logout, isAuthenticated, loading }) => {
           </Link>
         </div>
         <div className='right'>
-          <ul>
-            <li>
-              <Link
-                to='/login'
-                style={{ transition: 'ease-in-out 0.5s', color: txtColor }}
-              >
-                Giriş
-              </Link>
-            </li>
-            <li>
-              <Link
-                to='/register'
-                style={{ transition: 'ease-in-out 0.5s', color: txtColor }}
-              >
-                Kayıt Ol
-              </Link>
-            </li>
-          </ul>
+          <i
+            className='fas fa-bars'
+            style={{ transition: 'ease-in-out 0.5s', color: txtColor }}
+            onClick={(e) => setShowMenu(!showMenu)}
+          ></i>
+          {isAuthenticated ? userLinks : guestLinks}
         </div>
       </div>
     </nav>

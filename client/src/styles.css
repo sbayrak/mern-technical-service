@@ -335,6 +335,10 @@ nav .nav-wrapper .right {
   align-items: center;
   padding: 5px 10px;
 }
+nav .nav-wrapper .right i {
+  display: none;
+  color: #000;
+}
 nav .nav-wrapper .right ul {
   list-style: none;
   padding: 5px 10px;
@@ -831,6 +835,47 @@ nav .nav-wrapper .right ul li a {
 /* MOBILE MOBILE MOBILE */
 @media screen and (min-width: 320px) and (max-width: 600px) {
   nav {
+    padding: 5px;
+  }
+  nav .nav-wrapper {
+    width: 100%;
+    height: 60px;
+  }
+  nav .nav-wrapper .left {
+    width: 60%;
+    align-items: flex-start;
+  }
+
+  nav .nav-wrapper .left img {
+    width: 40px;
+  }
+  nav .nav-wrapper .left a {
+    padding: 5px 10px;
+    font-size: 14px;
+  }
+  nav .nav-wrapper .right {
+    width: 40%;
+    justify-content: center;
+  }
+  nav .nav-wrapper .right i {
+    display: block;
+    font-size: 28px;
+  }
+  nav .nav-wrapper .right ul {
+    background-color: rgba(0, 0, 0, 1);
+    position: absolute;
+    left: 0%;
+    width: 100%;
+    top: 65px;
+    height: 200px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 999999999;
+    transition: 0.5s ease-in-out;
+  }
+  nav .nav-wrapper .right ul.active {
+    left: -110%;
   }
 
   .technician .technician-wrapper .group {
@@ -1090,6 +1135,48 @@ nav .nav-wrapper .right ul li a {
 /* TABLET TABLET TABLET */
 /* TABLET TABLET TABLET */
 @media screen and (min-width: 601px) and (max-width: 960px) {
+  nav {
+    padding: 5px;
+  }
+  nav .nav-wrapper {
+    width: 100%;
+    height: 60px;
+  }
+  nav .nav-wrapper .left {
+    width: 60%;
+  }
+
+  nav .nav-wrapper .left img {
+    width: 40px;
+  }
+  nav .nav-wrapper .left a {
+    padding: 5px 10px;
+    font-size: 24px;
+  }
+  nav .nav-wrapper .right {
+    width: 40%;
+    justify-content: center;
+  }
+  nav .nav-wrapper .right i {
+    display: block;
+    font-size: 38px;
+  }
+  nav .nav-wrapper .right ul {
+    background-color: rgba(0, 0, 0, 1);
+    position: absolute;
+    left: 0%;
+    width: 100%;
+    top: 65px;
+    height: 200px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 999999999;
+    transition: 0.5s ease-in-out;
+  }
+  nav .nav-wrapper .right ul.active {
+    left: -110%;
+  }
   .technician .technician-wrapper .group {
     top: 10%;
     padding: 5px;
