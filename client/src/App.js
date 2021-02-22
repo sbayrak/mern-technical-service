@@ -6,11 +6,14 @@ import store from './store';
 import Login from './pages/auth/Login';
 import Alert from './layout/Alert';
 import Footer from './layout/Footer';
+import PrivateRoute from './pages/routing/PrivateRoute';
 import Home from './pages/routes/Home';
 import { loadUser } from './actions/auth';
 import setAuthToken from './utils/setAuthToken';
 import Register from './pages/auth/Register';
 import Navbar from './layout/Navbar';
+import Sidebar from './layout/Sidebar';
+import CreateRecord from './pages/records/CreateRecord';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -28,9 +31,13 @@ const App = () => {
         <Switch>
           <Route exact path='/login' component={Login}></Route>
           <Route exact path='/register' component={Register}></Route>
-          <Route exact path='/' component={Home}></Route>
+          <PrivateRoute exact path='/' component={Home}></PrivateRoute>
+          <PrivateRoute
+            exact
+            path='/create-record'
+            component={CreateRecord}
+          ></PrivateRoute>
         </Switch>
-        <Footer></Footer>
       </Router>
     </Provider>
   );

@@ -17,7 +17,7 @@ const Navbar = ({ logout, isAuthenticated, loading }) => {
       var scrolled = document.scrollingElement.scrollTop;
       if (scrolled >= 10) {
         setBgColor('rgba(0,0,0,.9)');
-        setTxtColor('#fff');
+        setTxtColor('#ddd');
       } else if (scrolled < 10) {
         setBgColor('rgba(0,0,0,.4)');
         setTxtColor('#eee');
@@ -26,13 +26,37 @@ const Navbar = ({ logout, isAuthenticated, loading }) => {
   });
 
   const userLinks = (
-    <ul>
+    <ul className={showMenu ? 'active' : ''}>
       <li>
         <Link
-          to='/create-record'
+          to='/records'
           style={{ transition: 'ease-in-out 0.5s', color: txtColor }}
         >
-          Kayıt Aç
+          Tüm Kayıtlar
+        </Link>
+      </li>
+      <li>
+        <Link
+          to='/step-one'
+          style={{ transition: 'ease-in-out 0.5s', color: txtColor }}
+        >
+          Teslim Alınan
+        </Link>
+      </li>
+      <li>
+        <Link
+          to='/step-two'
+          style={{ transition: 'ease-in-out 0.5s', color: txtColor }}
+        >
+          Teklif Verilen
+        </Link>
+      </li>
+      <li>
+        <Link
+          to='/step-three'
+          style={{ transition: 'ease-in-out 0.5s', color: txtColor }}
+        >
+          Sonuçlanan
         </Link>
       </li>
       <li>
@@ -47,7 +71,7 @@ const Navbar = ({ logout, isAuthenticated, loading }) => {
   );
 
   const guestLinks = (
-    <ul>
+    <ul className={showMenu ? 'active' : ''}>
       <li>
         <Link
           to='/login'

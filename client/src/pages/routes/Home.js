@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
   return (
@@ -6,12 +7,12 @@ const Home = () => {
       <div className='welcomer-wrapper'>
         <div className='top'>
           <span>Hoşgeldiniz. </span>
-          <p>İşlem yapmak için soldaki menüyü kullanın.</p>
+          <p>İşlem yapmak için yukarıdaki menüyü kullanın.</p>
         </div>
         <div className='bottom'>
-          <a href='/create-record' rel='noreferrer'>
+          <Link to='/create-record' rel='noreferrer'>
             Kayıt Aç
-          </a>
+          </Link>
         </div>
       </div>
     </div>

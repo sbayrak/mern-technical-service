@@ -305,6 +305,7 @@ nav {
   padding: 10px;
   position: fixed;
   top: 0;
+  z-index: 99999999999;
 }
 nav .nav-wrapper {
   width: 80%;
@@ -433,7 +434,7 @@ nav .nav-wrapper .right ul li a {
   width: 100%;
 }
 .new .new-wrapper {
-  height: 100vh;
+  height: 110vh;
   width: 80%;
   margin: 0 auto;
   position: relative;
@@ -829,11 +830,20 @@ nav .nav-wrapper .right ul li a {
   border: 1px solid #1ba3a3;
   background-color: #fff;
 }
+
 /* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
 /* MOBILE MOBILE MOBILE */
 /* MOBILE MOBILE MOBILE */
 /* MOBILE MOBILE MOBILE */
 @media screen and (min-width: 320px) and (max-width: 600px) {
+  .sidebar {
+    position: absolute;
+    left: 0;
+  }
+
+  .sidebar i {
+    display: block;
+  }
   nav {
     padding: 5px;
   }
@@ -860,6 +870,7 @@ nav .nav-wrapper .right ul li a {
   nav .nav-wrapper .right i {
     display: block;
     font-size: 28px;
+    cursor: pointer;
   }
   nav .nav-wrapper .right ul {
     background-color: rgba(0, 0, 0, 1);
