@@ -9,3 +9,9 @@ export const LOGOUT = 'LOGOUT';
 
 export const USER_LOADED = 'USER_LOADED';
 export const AUTH_ERROR = 'AUTH_ERROR';
+
+// RECORDS
+export const RECORDS_LOADED = 'RECORDS_LOADED';
+export const SINGLE_RECORD = 'SINGLE_RECORD';
+export const CREATE_RECORD = 'CREATE_RECORD';
+export const RECORD_FAIL = 'RECORD_FAIL';

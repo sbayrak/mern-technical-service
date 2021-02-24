@@ -14,6 +14,7 @@ import Register from './pages/auth/Register';
 import Navbar from './layout/Navbar';
 import Sidebar from './layout/Sidebar';
 import CreateRecord from './pages/records/CreateRecord';
+import Records from './pages/records/Records';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -36,6 +37,11 @@ const App = () => {
             exact
             path='/create-record'
             component={CreateRecord}
+          ></PrivateRoute>
+          <PrivateRoute
+            exact
+            path='/records'
+            component={Records}
           ></PrivateRoute>
         </Switch>
       </Router>

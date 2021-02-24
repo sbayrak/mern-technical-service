@@ -6,8 +6,7 @@ import { logout } from '../actions/auth';
 import PropTypes from 'prop-types';
 
 const Navbar = ({ logout, isAuthenticated, loading }) => {
-  const [bgColor, setBgColor] = useState('rgba(0,0,0,0.4)');
-  const [txtColor, setTxtColor] = useState('#000');
+  const [bgColor, setBgColor] = useState('rgba(0,0,0,0.8)');
   const [showMenu, setShowMenu] = useState(false);
 
   useEffect(() => {
@@ -17,10 +16,8 @@ const Navbar = ({ logout, isAuthenticated, loading }) => {
       var scrolled = document.scrollingElement.scrollTop;
       if (scrolled >= 10) {
         setBgColor('rgba(0,0,0,.9)');
-        setTxtColor('#ddd');
       } else if (scrolled < 10) {
-        setBgColor('rgba(0,0,0,.4)');
-        setTxtColor('#eee');
+        setBgColor('rgba(0,0,0,.8)');
       }
     });
   });
@@ -28,44 +25,19 @@ const Navbar = ({ logout, isAuthenticated, loading }) => {
   const userLinks = (
     <ul className={showMenu ? 'active' : ''}>
       <li>
-        <Link
-          to='/records'
-          style={{ transition: 'ease-in-out 0.5s', color: txtColor }}
-        >
-          Tüm Kayıtlar
-        </Link>
+        <Link to='/records'>Tüm Kayıtlar</Link>
       </li>
       <li>
-        <Link
-          to='/step-one'
-          style={{ transition: 'ease-in-out 0.5s', color: txtColor }}
-        >
-          Teslim Alınan
-        </Link>
+        <Link to='/step-one'>Teslim Alınan</Link>
       </li>
       <li>
-        <Link
-          to='/step-two'
-          style={{ transition: 'ease-in-out 0.5s', color: txtColor }}
-        >
-          Teklif Verilen
-        </Link>
+        <Link to='/step-two'>Teklif Verilen</Link>
       </li>
       <li>
-        <Link
-          to='/step-three'
-          style={{ transition: 'ease-in-out 0.5s', color: txtColor }}
-        >
-          Sonuçlanan
-        </Link>
+        <Link to='/step-three'>Sonuçlanan</Link>
       </li>
       <li>
-        <Link
-          onClick={logout}
-          style={{ transition: 'ease-in-out 0.5s', color: txtColor }}
-        >
-          Çıkış
-        </Link>
+        <Link onClick={logout}>Çıkış</Link>
       </li>
     </ul>
   );
@@ -73,20 +45,10 @@ const Navbar = ({ logout, isAuthenticated, loading }) => {
   const guestLinks = (
     <ul className={showMenu ? 'active' : ''}>
       <li>
-        <Link
-          to='/login'
-          style={{ transition: 'ease-in-out 0.5s', color: txtColor }}
-        >
-          Giriş
-        </Link>
+        <Link to='/login'>Giriş</Link>
       </li>
       <li>
-        <Link
-          to='/register'
-          style={{ transition: 'ease-in-out 0.5s', color: txtColor }}
-        >
-          Kayıt Ol
-        </Link>
+        <Link to='/register'>Kayıt Ol</Link>
       </li>
     </ul>
   );
@@ -96,17 +58,11 @@ const Navbar = ({ logout, isAuthenticated, loading }) => {
       <div className='nav-wrapper'>
         <div className='left'>
           <img src={logo} alt='teknik_servis_logo' />
-          <Link
-            to='/'
-            style={{ transition: 'ease-in-out 0.5s', color: txtColor }}
-          >
-            Teknik Servis Programı
-          </Link>
+          <Link to='/'>Teknik Servis Programı</Link>
         </div>
         <div className='right'>
           <i
             className='fas fa-bars'
-            style={{ transition: 'ease-in-out 0.5s', color: txtColor }}
             onClick={(e) => setShowMenu(!showMenu)}
           ></i>
           {isAuthenticated ? userLinks : guestLinks}

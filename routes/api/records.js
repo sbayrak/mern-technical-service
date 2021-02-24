@@ -40,7 +40,7 @@ router.post('/', auth, async (req, res) => {
   try {
     let user = await User.findById(req.user.id);
     recordFields.company = user.company;
-    recordFields.status = '0';
+    recordFields.status = 'Teslim Alindi';
 
     let record = new Record(recordFields);
     await record.save();
@@ -53,7 +53,7 @@ router.post('/', auth, async (req, res) => {
 });
 
 // @route   GET /api/records
-// @desc    Get user's records
+// @desc    Get user's records (all records)
 // @access  Private
 router.get('/', auth, async (req, res) => {
   try {
