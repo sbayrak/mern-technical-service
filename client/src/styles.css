@@ -555,6 +555,7 @@ nav .nav-wrapper .right ul li a {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  text-transform: uppercase;
 }
 .new .new-wrapper .groups button {
   padding: 10px 80px;

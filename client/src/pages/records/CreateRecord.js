@@ -7,8 +7,8 @@ import { setAlert } from '../../actions/alert';
 import { useHistory } from 'react-router-dom';
 
 const CreateRecord = ({ createRecord, record }) => {
-  const [customerName, setCustomerName] = useState('');
-  const [customerPhone, setCustomerPhone] = useState('');
+  const [customername, setCustomerName] = useState('');
+  const [customerphone, setCustomerPhone] = useState('');
   const [type, setType] = useState('');
   const [brand, setBrand] = useState('');
   const [modelno, setModelno] = useState('');
@@ -23,8 +23,8 @@ const CreateRecord = ({ createRecord, record }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     createRecord({
-      customerName: customerName,
-      customerPhone: customerPhone,
+      customername: customername,
+      customerphone: customerphone,
       type: type,
       brand: brand,
       modelno: modelno,
@@ -36,8 +36,7 @@ const CreateRecord = ({ createRecord, record }) => {
     });
 
     setAlert('Kayıt başarıyla oluşturuldu', 'success');
-  };
-  console.log(customerPhone);
+  }; 
 
   return (
     <Fragment>
@@ -53,7 +52,7 @@ const CreateRecord = ({ createRecord, record }) => {
                   <input
                     type='text'
                     name='customerName'
-                    value={customerName}
+                    value={customername}
                     onChange={(e) => setCustomerName(e.target.value)}
                   />
                 </div>
@@ -62,7 +61,7 @@ const CreateRecord = ({ createRecord, record }) => {
                   <input
                     type='text'
                     name='customerPhone'
-                    value={customerPhone}
+                    value={customerphone}
                     onChange={(e) => setCustomerPhone(e.target.value)}
                   />
                 </div>

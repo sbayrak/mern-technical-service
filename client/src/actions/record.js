@@ -28,8 +28,8 @@ export const getAllRecords = () => async (dispatch) => {
 
 // CREATE RECORD
 export const createRecord = ({
-  customerName,
-  customerPhone,
+  customername,
+  customerphone,
   type,
   brand,
   modelno,
@@ -41,12 +41,12 @@ export const createRecord = ({
 }) => async (dispatch) => {
   const config = {
     headers: {
-      'Content-type': 'application/json',
+      'Content-Type': 'application/json',
     },
   };
   const body = JSON.stringify({
-    customerName,
-    customerPhone,
+    customername,
+    customerphone,
     type,
     brand,
     modelno,
