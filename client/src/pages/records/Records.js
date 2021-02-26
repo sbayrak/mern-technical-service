@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getAllRecords } from '../../actions/record';
 import { Link } from 'react-router-dom';
+import Spinner from '../../layout/Spinner';
 
 const Records = ({ getAllRecords, record: { loading, records } }) => {
   useEffect(() => {
@@ -23,21 +24,27 @@ const Records = ({ getAllRecords, record: { loading, records } }) => {
             </tr>
           </thead>
           <tbody>
-            {loading
-              ? 'loading..'
-              : records.map((record) => (
-                  <tr>
-                    <td>{record._id}</td>
-                    <td>{record.customername}</td>
-                    <td>{record.brand}</td>
-                    <td>{record.status}</td>
-                    <td>
-                      <Link to={`/records/record/${record._id}`}>
-                        <i className='fas fa-external-link-alt'></i>
-                      </Link>
-                    </td>
-                  </tr>
-                ))}
+            {loading ? (
+              <Spinner></Spinner>
+            ) : (
+              records.map((record) => (
+                <tr key={record._id}>
+                  <td>
+                    <Link to={`/records/record/${record._id}`}>
+                      {record._id}
+                    </Link>
+                  </td>
+                  <td>{record.customername}</td>
+                  <td>{record.brand}</td>
+                  <td>{record.status}</td>
+                  <td>
+                    <Link to={`/records/record/${record._id}`}>
+                      <i className='fas fa-external-link-alt'></i>
+                    </Link>
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>

@@ -17,9 +17,9 @@ router.post('/', auth, async (req, res) => {
     modelno,
     physicaldamage,
     accessories,
-    not,
-    complaint,
     technician,
+    complaint,
+    not,
   } = req.body;
 
   let recordFields = {};

@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 import {
   RECORDS_LOADED,
   CREATE_RECORD,
@@ -21,7 +22,12 @@ export default function (state = initialState, action) {
         loading: false,
         records: payload,
       };
-
+    case CREATE_RECORD:
+      return {
+        ...state,
+        loading: false,
+        single_record: payload,
+      };
     default:
       return state;
   }

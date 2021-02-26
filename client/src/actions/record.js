@@ -25,3 +25,50 @@ export const getAllRecords = () => async (dispatch) => {
     dispatch({ type: RECORD_FAIL });
   }
 };
+
+// CREATE RECORD
+export const createRecord = ({
+  customerName,
+  customerPhone,
+  type,
+  brand,
+  modelno,
+  physicalDamage,
+  accessories,
+  technician,
+  complaint,
+  not,
+}) => async (dispatch) => {
+  const config = {
+    headers: {
+      'Content-type': 'application/json',
+    },
+  };
+  const body = JSON.stringify({
+    customerName,
+    customerPhone,
+    type,
+    brand,
+    modelno,
+    physicalDamage,
+    accessories,
+    technician,
+    complaint,
+    not,
+  });
+  try {
+    const res = await axios.post('/api/records', body, config);
+
+    dispatch({
+      type: CREATE_RECORD,
+      payload: res.data,
+    });
+  } catch (err) {
+    const errors = err.response.data.errors;
+
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+    }
+    dispatch({ type: RECORD_FAIL });
+  }
+};

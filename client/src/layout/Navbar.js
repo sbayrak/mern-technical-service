@@ -28,13 +28,10 @@ const Navbar = ({ logout, isAuthenticated, loading }) => {
         <Link to='/records'>Tüm Kayıtlar</Link>
       </li>
       <li>
-        <Link to='/step-one'>Teslim Alınan</Link>
+        <Link to='/create-record'>Kayıt Aç</Link>
       </li>
       <li>
-        <Link to='/step-two'>Teklif Verilen</Link>
-      </li>
-      <li>
-        <Link to='/step-three'>Sonuçlanan</Link>
+        <Link to='/profile'>Panelim</Link>
       </li>
       <li>
         <Link onClick={logout}>Çıkış</Link>
